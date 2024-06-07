@@ -1,5 +1,4 @@
 import random
-import folium
 import webbrowser
 
 def generate_random_coordinate():
@@ -15,20 +14,14 @@ def generate_random_coordinate():
 
     return random_latitude, random_longitude
 
-# 중심 좌표를 한국의 중앙쯤으로 설정
-map_center = [36.5, 127.5]
+# 랜덤 좌표 생성
+lat, lon = generate_random_coordinate()
 
-# 지도 생성
-m = folium.Map(location=map_center, zoom_start=7)
+# 구글 맵 검색 URL 생성
+google_maps_url = f"https://www.google.com/maps/search/?api=1&query={lat},{lon}"
 
-# 랜덤 좌표 생성 및 지도에 표시
-for _ in range(1):
-    lat, lon = generate_random_coordinate()
-    folium.Marker([lat, lon], popup=f"위도: {lat:.6f}, 경도: {lon:.6f}").add_to(m)
+# URL 출력
+print("Google Maps URL:", google_maps_url)
 
-# 지도를 HTML 파일로 저장
-map_file = "random_coordinates_map.html"
-m.save(map_file)
-
-# 웹 브라우저로 HTML 파일 열기
-webbrowser.open(map_file)
+# 웹 브라우저로 URL 열기
+webbrowser.open(google_maps_url)
